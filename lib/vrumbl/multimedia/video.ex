@@ -6,7 +6,9 @@ defmodule Vrumbl.Multimedia.Video do
     field :description, :string
     field :title, :string
     field :url, :string
+
     belongs_to :user, Vrumbl.Accounts.User
+    belongs_to :category, Vrumbl.Multimedia.Category
 
     timestamps()
   end
@@ -14,7 +16,7 @@ defmodule Vrumbl.Multimedia.Video do
   @doc false
   def changeset(video, attrs) do
     video
-    |> cast(attrs, [:url, :title, :description])
+    |> cast(attrs, [:url, :title, :description, :category])
     |> validate_required([:url, :title, :description])
   end
 end

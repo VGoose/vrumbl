@@ -23,6 +23,7 @@ defmodule VrumblWeb do
 
       import Plug.Conn
       import VrumblWeb.Gettext
+      import VrumblWeb.Auth, only: [authenticate_user: 2]
       alias VrumblWeb.Router.Helpers, as: Routes
     end
   end
@@ -74,6 +75,7 @@ defmodule VrumblWeb do
       import Plug.Conn
       import Phoenix.Controller
       import Phoenix.LiveView.Router
+      import VrumblWeb.Auth, only: [authenticate_user: 2]
     end
   end
 

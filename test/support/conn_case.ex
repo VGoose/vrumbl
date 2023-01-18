@@ -23,6 +23,7 @@ defmodule VrumblWeb.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import VrumblWeb.ConnCase
+      import Vrumbl.TestHelpers
 
       alias VrumblWeb.Router.Helpers, as: Routes
 

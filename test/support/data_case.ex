@@ -24,6 +24,7 @@ defmodule Vrumbl.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Vrumbl.DataCase
+      import Vrumbl.TestHelpers
     end
   end
 

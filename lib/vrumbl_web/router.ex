@@ -18,9 +18,10 @@ defmodule VrumblWeb.Router do
   scope "/", VrumblWeb do
     pipe_through :browser
 
+    get "/", PageController, :index
     resources "/users", UserController, only: [:index, :show, :new, :create]
     resources "/sessions", SessionController, only: [:new, :create, :delete]
-    get "/", PageController, :index
+    get "/watch/:id", WatchController, :show
   end
 
   scope "/manage", VrumblWeb do

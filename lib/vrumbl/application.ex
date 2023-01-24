@@ -15,9 +15,10 @@ defmodule Vrumbl.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Vrumbl.PubSub},
       # Start the Endpoint (http/https)
-      VrumblWeb.Endpoint
+      VrumblWeb.Endpoint,
       # Start a worker by calling: Vrumbl.Worker.start_link(arg)
       # {Vrumbl.Worker, arg}
+      VrumblWeb.Presence
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

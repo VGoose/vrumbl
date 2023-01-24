@@ -53,6 +53,7 @@ defmodule Vrumbl.Multimedia do
   end
 
   alias Vrumbl.Multimedia.Category
+
   def create_category!(name) do
     Repo.insert!(%Category{name: name}, on_conflict: :nothing)
   end
@@ -60,6 +61,24 @@ defmodule Vrumbl.Multimedia do
   def list_alphabetical_categories do
     Category
     |> Category.alphabetical()
-    |> Repo.all
+    |> Repo.all()
+  end
+
+  alias Vrumbl.Multimedia.Annotation
+
+  def annotate_video(%Accounts.User{id: user_id}, video_id, attrs) do
+    %Annotation{video_id: video_id, user_id: user_id}
+    |> Annotation.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def list_annotations(%Video{} = video, since_id \\ 0) do
+    Repo.all(
+      from a in Ecto.assoc(video, :annotations),
+        where: a.id > ^since_id,
+        order_by: [asc: a.at, asc: a.id],
+        limit: 500,
+        preload: [:user]
+    )
   end
 end

@@ -10,6 +10,11 @@ defmodule Vrumbl.Accounts do
     Repo.all(User)
   end
 
+  import Ecto.Query
+  def list_users_with_ids(ids) do
+    Repo.all(from(u in User, where: u.id in ^ids))
+  end
+
   def get_user(id) do
     Repo.get(User, id)
   end
@@ -44,11 +49,14 @@ defmodule Vrumbl.Accounts do
 
   def authenticate_by_login(username, pass) do
     user = get_user_by(username: username)
+
     cond do
       user && Pbkdf2.verify_pass(pass, user.password_hash) ->
         {:ok, user}
+
       user ->
         {:error, :unauthorized}
+
       true ->
         Pbkdf2.no_user_verify()
         {:error, :not_found}
